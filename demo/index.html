@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+    const _customElementsDefine = window.customElements.define;
+      window.customElements.define = (name, cl, conf) => {
+        if (!customElements.get(name)) {
+          _customElementsDefine.call(window.customElements, name, cl, conf);
+        }
+      };
+</script>
+    <script type="module">
+        import '../contact-form.js';
+        import '@catsys/contact-card'
+    </script>
+    <title>ContactForm</title>
+</head>
+<body>
+    <contact-form></contact-form>
+    <contact-card></contact-card>
+    <script>
+        const node = document.querySelector('contact-form');
+        node.addEventListener('register-contact-request', event => {
+            const card = document.querySelector('contact-card');
+            card.contact = event.detail;
+        });
+    </script>
+</body>
+</html>
